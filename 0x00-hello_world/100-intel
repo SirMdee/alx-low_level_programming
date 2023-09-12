@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check if the CFILE variable is set
+if [ -z "$CFILE" ]; then
+  echo "CFILE variable is not set. Please set it to the name of your C file."
+  exit 1
+fi
+
+# Check if the C file exists
+if [ ! -f "$CFILE" ]; then
+  echo "C file '$CFILE' not found."
+  exit 1
+fi
+
+# Generate the output file name by replacing .c with .s
+ASMFILE="${CFILE%.c}.s"
+
+# Compile the C code to generate the assembly code and save it to the output file
+gcc -S -masm=intel "$CFILE" -o "$ASMFILE"
+
+# Check if the compilation was successful
+if [ $? -eq 0 ]; then
+  echo "Assembly code saved to '$ASMFILE'."
+else
+  echo "Compilation failed."
+fi
