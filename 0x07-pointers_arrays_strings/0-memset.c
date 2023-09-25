@@ -3,8 +3,13 @@
 
 #include <stdio.h>
 
-char *_memset(char *s, char b, unsigned int n);
+char *_memset(char *s, char b, unsigned int n)
+{
+	for (unsigned int i = 0; i < n; i++)
 
-void simple_print_buffer(char *buffer, unsigned int size);
+	s[i] = b;
+
+	return (s);
+}
 
 #endif /* MAIN_H */
